@@ -4,6 +4,7 @@ import com.projects.todo.model.Task;
 import com.projects.todo.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * Created by sstoica on 5/17/2018.
  */
 @Service
+@Transactional
 public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskRepository taskRepository;
