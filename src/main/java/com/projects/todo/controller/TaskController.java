@@ -28,14 +28,15 @@ public class TaskController {
         return "tasks-list";
     }
 
-    @GetMapping
-    public String showNewTaskPage(){
+    @GetMapping("/new")
+    public String showNewTaskPage(Model model){
+        model.addAttribute("task",new Task());
         return "create-task";
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public String create(@ModelAttribute Task task) {
+    public String create(@ModelAttribute("task") Task task) {
         taskService.save(task);
         return "tasks-list";
     }

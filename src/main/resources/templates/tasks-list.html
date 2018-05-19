@@ -6,7 +6,7 @@
 </head>
 <body>
    <ul>
-       <li th:each="task : tasks">
+       <li th:each="task : ${tasks}">
            ${task.name}
 
            <form th:action="@{/tasks/${task.id}}" method="DELETE">
@@ -16,6 +16,8 @@
    </ul>
     <br>
 
-    <button>Add</button>
+   <form th:action="@{/tasks/new}" method="GET">
+       <button>Add</button>
+   </form>
 </body>
 </html>
