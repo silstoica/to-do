@@ -31,25 +31,42 @@ public class TaskController {
     @GetMapping("/new")
     public String showNewTaskPage(Model model){
         model.addAttribute("task",new Task());
-        return "create-task";
+        return "new-task";
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
     public String create(@ModelAttribute("task") Task task) {
         taskService.save(task);
-        return "tasks-list";
+        return "redirect:/tasks";
     }
 
-    @GetMapping("/{id}")
+
+    @GetMapping("/get/{id}")
     public String get(@PathVariable("id") long id) {
         taskService.getOne(id);
-        return "task";
+        return "view-task";
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable("id") long id, @ModelAttribute("task") Task task){
+        Task taskFromDB = taskService.getOne(id);
+        taskFromDB.setName(task.getName());
+        taskFromDB.setDeadline(task.getDeadline());
+        taskFromDB.setPriority(task.getPriority());
+        taskFromDB.setStatus(task.getStatus());
+        taskService.save(taskFromDB);
+        return "redirect:/tasks";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @ModelAttribute("task") Task task, @PathVariable("id") long id) {
+        model.addAttribute("task",taskService.getOne(id));
+        return "edit-task";
+    }
+
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") long id){
         taskService.delete(id);
-        return "tasks-list";
+        return "redirect:/tasks";
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Created by sstoica on 5/14/2018.
@@ -19,8 +20,8 @@ public class Task {
     private Long id;
     private String name;
 //    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDateTime deadline;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date deadline;
     private Priority priority;
     private Status status;
 
@@ -40,12 +41,12 @@ public class Task {
         this.name = name;
     }
 
-    public LocalDateTime getDeadline() {
-        return deadline;
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
+    public Date getDeadline() {
+        return deadline;
     }
 
     public Priority getPriority() {
