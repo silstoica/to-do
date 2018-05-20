@@ -1,13 +1,17 @@
 package com.projects.todo.controller;
 
 import com.projects.todo.model.Task;
+import com.projects.todo.security.ToDoUserDetails;
 import com.projects.todo.service.TaskService;
+import com.projects.todo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -21,9 +25,12 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping
     public String list(Model model){
-        List <Task> tasks = taskService.findAll();
+        List <Task> tasks = taskService.findAllByUser();
         model.addAttribute("tasks", tasks);
         return "tasks-list";
     }
@@ -35,7 +42,10 @@ public class TaskController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute("task") Task task) {
+    public String create(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new-task";
+        }
         taskService.save(task);
         return "redirect:/tasks";
     }
@@ -48,12 +58,19 @@ public class TaskController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@PathVariable("id") long id, @ModelAttribute("task") Task task){
+    public String update(@PathVariable("id") long id, @ModelAttribute("task") Task task, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()) {
+            return "edit-task";
+        }
+
+        // muta asta
         Task taskFromDB = taskService.getOne(id);
         taskFromDB.setName(task.getName());
         taskFromDB.setDeadline(task.getDeadline());
         taskFromDB.setPriority(task.getPriority());
         taskFromDB.setStatus(task.getStatus());
+        // pana aici
         taskService.save(taskFromDB);
         return "redirect:/tasks";
     }

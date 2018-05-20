@@ -15,4 +15,6 @@ public interface TaskService {
     Task getOne(Long id);
 
     void delete(long id);
+
+    List<Task> findAllByUser();
 }

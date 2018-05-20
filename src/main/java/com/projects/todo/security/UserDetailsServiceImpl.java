@@ -34,6 +34,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         authorities.add(authority);
 
         ToDoUserDetails toDoUserDetails = new ToDoUserDetails();
+        // aici se pune id pe ToDoUSerDetails
+        toDoUserDetails.setId(user.getId());
         toDoUserDetails.setUsername(user.getUsername());
         toDoUserDetails.setPassword(user.getPassword());
         toDoUserDetails.setAuthorities(authorities);

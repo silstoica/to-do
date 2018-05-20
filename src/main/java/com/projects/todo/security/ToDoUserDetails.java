@@ -9,6 +9,7 @@ import java.util.Collection;
  * Created by sstoica on 5/18/2018.
  */
 public class ToDoUserDetails implements UserDetails {
+    private Long id;
     private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
@@ -20,6 +21,10 @@ public class ToDoUserDetails implements UserDetails {
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
@@ -42,6 +47,12 @@ public class ToDoUserDetails implements UserDetails {
         return true;
     }
 
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -51,13 +62,11 @@ public class ToDoUserDetails implements UserDetails {
     }
 
     @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-
-    }
-
-    @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

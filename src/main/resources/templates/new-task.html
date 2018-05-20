@@ -9,7 +9,11 @@
     <form th:action="@{/tasks}" method="POST" th:object="${task}">
 
         <input type="text" th:field="*{name}"  th:placeholder="Name"/> <br/>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
         <input type="date" th:field="*{deadline}"  /> <br/>
+        <div th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}"></div>
+
         <select th:field="*{priority}">
             <option  th:each="priority : ${T(com.projects.todo.model.Priority).values()}" th:value="${{priority}}" th:text="${priority.displayName}"></option>
         </select><br>
