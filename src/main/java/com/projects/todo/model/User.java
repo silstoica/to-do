@@ -3,10 +3,8 @@ package com.projects.todo.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-/**
- * Created by sstoica on 5/18/2018.
- */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class User {
@@ -14,7 +12,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min = 6, message = "User name has to have at least 5 characters")
     private String username;
+    @Size(min = 6, message = "Password must have at least 6 characters")
     private String password;
     private Role role;
 

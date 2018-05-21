@@ -8,9 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by sstoica on 5/18/2018.
- */
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {

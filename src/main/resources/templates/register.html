@@ -6,12 +6,16 @@
     <title>To-Do</title>
 </head>
 <body>
-    <form th:action="@{/register}" method="POST">
+    <form th:action="@{/register}" method="POST" th:object="${user}">
         <h3 th:text="Register"></h3>
         <br/>
 
-        <input type="text" id="name" name="username"  th:placeholder="Username"/> <br/>
-        <input type="password" id="password" name="password" th:placeholder="Password"/> <br />
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        <input type="text" id="name" th:field="*{username}"  th:placeholder="Username"/> <br/>
+
+
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <input type="password" id="password" th:field="*{password}" th:placeholder="Password"/> <br />
 
         <button name="Submit" value="register" type="Submit" th:text="Register"></button>
     </form>

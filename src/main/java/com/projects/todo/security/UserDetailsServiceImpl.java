@@ -11,12 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by sstoica on 5/18/2018.
- */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 
@@ -34,7 +30,6 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         authorities.add(authority);
 
         ToDoUserDetails toDoUserDetails = new ToDoUserDetails();
-        // aici se pune id pe ToDoUSerDetails
         toDoUserDetails.setId(user.getId());
         toDoUserDetails.setUsername(user.getUsername());
         toDoUserDetails.setPassword(user.getPassword());

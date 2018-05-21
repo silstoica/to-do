@@ -20,8 +20,8 @@
 
         <button name="Submit" value="submit" type="Submit" th:text="Save"></button>
     </form>
-    <form th:action="@{/tasks}" method="GET">
+    <a th:href="@{/tasks}">
         <button name="Cancel" th:value="cancel" th:text="Cancel"></button>
-    </form>
+    </a>
 </body>
 </html>

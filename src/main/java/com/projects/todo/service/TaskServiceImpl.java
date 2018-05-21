@@ -10,9 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by sstoica on 5/17/2018.
- */
 @Service
 @Transactional
 public class TaskServiceImpl implements TaskService {
@@ -49,5 +46,15 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> findAllByUser() {
         ToDoUserDetails currentUser = (ToDoUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return taskRepository.findAllByUserId(currentUser.getId());
+    }
+
+    @Override
+    public Task update(Task task) {
+        Task taskFromDB = taskRepository.getOne(task.getId());
+        taskFromDB.setName(task.getName());
+        taskFromDB.setDeadline(task.getDeadline());
+        taskFromDB.setPriority(task.getPriority());
+        taskFromDB.setStatus(task.getStatus());
+        return taskFromDB;
     }
 }

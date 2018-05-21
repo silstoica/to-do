@@ -1,6 +1,5 @@
 package com.projects.todo.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -8,12 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.util.Date;
 
-/**
- * Created by sstoica on 5/14/2018.
- */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Task {
@@ -23,7 +18,6 @@ public class Task {
     @NotNull(message = "Name is required.")
     @Size(min = 3, message = "Name should be at least 3 characters long")
     private String name;
-//    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Date is required.")
     @Future(message = "Date should be in the future.")

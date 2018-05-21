@@ -5,9 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-/**
- * Created by sstoica on 5/18/2018.
- */
 public class ToDoUserDetails implements UserDetails {
     private Long id;
     private String username;
